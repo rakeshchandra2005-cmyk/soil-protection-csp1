@@ -3,88 +3,472 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="A student CSP project raising awareness about soil protection and sustainable land care.">
-  <title>SoilGuard | Soil Protection CSP Project</title>
-  <link rel="stylesheet" href="style.css">
+  <meta name="description" content="A student community service project promoting soil protection, soil conservation, and environmental awareness.">
+  <meta name="theme-color" content="#214b35">
+  <title>SoilGuard | Protect Our Soil, Protect Our Future</title>
+  <style>
+    :root {
+      --green-950:#183728; --green-900:#214b35; --green-800:#2e6245;
+      --green-700:#3e7853; --green-100:#e5efdf; --green-50:#f3f7ef;
+      --cream:#fbf8ef; --earth:#a76c42; --ink:#243329; --muted:#667568;
+      --white:#fff; --line:#dfe7da; --shadow:0 14px 36px rgba(24,55,40,.09);
+      --radius:20px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth;scroll-padding-top:90px}
+    body{margin:0;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--cream);color:var(--ink);line-height:1.65}
+    img{max-width:100%;display:block}
+    a{color:var(--green-800)}
+    button,input,select,textarea{font:inherit}
+    button,a{ -webkit-tap-highlight-color:transparent}
+    :focus-visible{outline:3px solid #d18b48;outline-offset:3px}
+    .skip-link{position:absolute;left:-999px;top:8px;background:white;padding:10px 14px;z-index:999}
+    .skip-link:focus{left:8px}
+    .container{width:min(1120px,calc(100% - 40px));margin-inline:auto}
+    .site-header{position:sticky;top:0;z-index:50;background:rgba(251,248,239,.94);backdrop-filter:blur(12px);border-bottom:1px solid rgba(223,231,218,.85)}
+    .nav-wrap{min-height:74px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+    .brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--green-950);font-weight:850;letter-spacing:-.04em;font-size:1.22rem}
+    .brand-mark{width:40px;height:40px;border-radius:14px;background:var(--green-900);display:grid;place-items:center;color:white;font-size:1.3rem}
+    .nav-links{display:flex;align-items:center;gap:20px}
+    .nav-links a{text-decoration:none;font-size:.94rem;font-weight:650;color:#405547}
+    .nav-links a:hover{color:var(--earth)}
+    .menu-toggle{display:none;background:transparent;border:1px solid var(--line);border-radius:12px;padding:8px 12px;color:var(--green-900)}
+    .hero{padding:72px 0 60px;overflow:hidden}
+    .hero-grid{display:grid;grid-template-columns:1.04fr .96fr;gap:48px;align-items:center}
+    .eyebrow{display:inline-flex;align-items:center;gap:8px;border:1px solid #d6e3d0;background:#eef4e8;color:var(--green-800);font-size:.8rem;font-weight:800;text-transform:uppercase;letter-spacing:.12em;padding:7px 12px;border-radius:999px}
+    h1,h2,h3{line-height:1.15;letter-spacing:-.035em;color:var(--green-950)}
+    h1{font-size:clamp(2.65rem,5.6vw,4.65rem);margin:20px 0}
+    h1 span{color:var(--green-700)}
+    .hero-copy{font-size:1.08rem;color:#5c6d60;max-width:570px}
+    .actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:12px;padding:12px 18px;font-weight:750;text-decoration:none;cursor:pointer;transition:transform .2s,background .2s}
+    .btn:hover{transform:translateY(-2px)}
+    .btn-primary{background:var(--green-900);color:white}
+    .btn-primary:hover{background:var(--green-800)}
+    .btn-secondary{background:#e9efe3;color:var(--green-900)}
+    .hero-note{margin-top:24px;color:var(--muted);font-size:.88rem}
+    .hero-visual{position:relative}
+    .hero-image{width:100%;height:470px;object-fit:cover;border-radius:32px;box-shadow:var(--shadow);background:#dce7d5}
+    .floating-note{position:absolute;left:-24px;bottom:24px;background:white;padding:16px 18px;border-radius:16px;box-shadow:var(--shadow);max-width:230px}
+    .floating-note strong{display:block;color:var(--green-900)}
+    .floating-note small{color:var(--muted)}
+    .section{padding:76px 0}
+    .section-soft{background:var(--green-50)}
+    .section-heading{max-width:700px;margin:0 auto 38px;text-align:center}
+    .section-heading .eyebrow{margin-bottom:12px}
+    h2{font-size:clamp(2rem,4vw,3rem);margin:10px 0 14px}
+    .section-heading p{color:var(--muted);margin:0}
+    .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:36px}
+    .stat{padding:22px;background:white;border:1px solid var(--line);border-radius:16px}
+    .stat strong{display:block;color:var(--green-800);font-size:1.08rem}
+    .stat span{font-size:.9rem;color:var(--muted)}
+    .card-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+    .card{background:white;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;box-shadow:0 8px 25px rgba(24,55,40,.04)}
+    .card-image{height:205px;width:100%;object-fit:cover;background:#e0e8d9}
+    .card-body{padding:22px}
+    .card h3{font-size:1.22rem;margin:0 0 9px}
+    .card p{color:var(--muted);font-size:.95rem;margin:0}
+    .tag{display:inline-block;margin-bottom:12px;background:#edf4e8;color:var(--green-800);padding:4px 9px;border-radius:99px;font-size:.75rem;font-weight:800}
+    .problem-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+    .problem{padding:24px;border:1px solid var(--line);border-radius:18px;background:white;display:flex;gap:15px}
+    .problem-icon{flex:0 0 46px;height:46px;border-radius:14px;display:grid;place-items:center;background:#f3eadf;font-size:1.4rem}
+    .problem h3{margin:0 0 7px;font-size:1.15rem}
+    .problem p{margin:0;color:var(--muted);font-size:.94rem}
+    .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;counter-reset:step}
+    .step{counter-increment:step;padding:20px;border-radius:18px;background:white;border:1px solid var(--line)}
+    .step:before{content:"0" counter(step);display:grid;place-items:center;width:38px;height:38px;background:var(--green-900);color:white;border-radius:12px;font-weight:800;margin-bottom:16px}
+    .step h3{font-size:1.08rem;margin:0 0 8px}
+    .step p{font-size:.9rem;color:var(--muted);margin:0}
+    .quiz-layout{display:grid;grid-template-columns:.8fr 1.2fr;gap:30px;align-items:start}
+    .quiz-intro{position:sticky;top:100px}
+    .quiz-intro p{color:var(--muted)}
+    .quiz-box{background:white;border:1px solid var(--line);border-radius:24px;padding:28px;box-shadow:var(--shadow)}
+    .quiz-progress{height:8px;background:#e7eee2;border-radius:99px;overflow:hidden;margin:14px 0 24px}
+    .quiz-progress span{height:100%;width:0;display:block;background:var(--green-700);transition:width .25s}
+    .question-count{font-size:.82rem;color:var(--muted);font-weight:750}
+    .question{font-size:1.25rem;margin:8px 0 18px}
+    .answers{display:grid;gap:10px}
+    .answer{width:100%;text-align:left;background:#fbfcf8;border:1px solid var(--line);border-radius:12px;padding:13px 15px;cursor:pointer;color:var(--ink)}
+    .answer:hover:not(:disabled){border-color:var(--green-700);background:#f1f6ec}
+    .answer.correct{background:#e6f4e5;border-color:#43824b}
+    .answer.incorrect{background:#fff0e9;border-color:#c06b48}
+    .answer:disabled{cursor:default}
+    .quiz-controls{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:20px}
+    .feedback{min-height:28px;margin-top:12px;color:var(--green-800);font-weight:700}
+    .score{font-size:2.5rem;font-weight:900;color:var(--green-800)}
+    .awareness-banner{display:grid;grid-template-columns:1fr 1fr;gap:30px;align-items:center;background:var(--green-900);color:white;border-radius:28px;padding:34px}
+    .awareness-banner h2{color:white}
+    .awareness-banner p{color:#dce9dc}
+    .awareness-banner ul{padding-left:20px;color:#f4f7ef}
+    .awareness-banner img{height:320px;width:100%;object-fit:cover;border-radius:20px}
+    .contact-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:36px;align-items:start}
+    .contact-copy p{color:var(--muted)}
+    .contact-form{background:white;border:1px solid var(--line);padding:26px;border-radius:22px}
+    .field{margin-bottom:16px}
+    .field label{display:block;font-weight:750;font-size:.9rem;margin-bottom:6px;color:var(--green-950)}
+    .field input,.field select,.field textarea{width:100%;padding:12px 13px;border:1px solid #cfdacb;border-radius:10px;background:#fffefa;color:var(--ink)}
+    .field textarea{min-height:120px;resize:vertical}
+    .field small{display:block;color:var(--muted);margin-top:5px}
+    .form-status{margin-top:12px;color:var(--green-800);font-weight:700}
+    .references{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+    .reference{background:white;border:1px solid var(--line);border-radius:14px;padding:16px}
+    .reference a{font-weight:750;text-decoration:none}
+    .reference p{margin:6px 0 0;color:var(--muted);font-size:.88rem}
+    .conclusion{max-width:800px;margin:auto;text-align:center}
+    .conclusion p{font-size:1.08rem;color:var(--muted)}
+    footer{background:var(--green-950);color:#dbe6d8;padding:32px 0}
+    .footer-wrap{display:flex;justify-content:space-between;gap:20px;align-items:center;flex-wrap:wrap}
+    footer strong{color:white}
+    footer a{color:#e4eedf}
+    .back-top{position:fixed;right:18px;bottom:18px;width:46px;height:46px;border:0;border-radius:15px;background:var(--green-900);color:white;font-size:1.2rem;box-shadow:var(--shadow);cursor:pointer;display:none;z-index:30}
+    .back-top.show{display:block}
+    .small-note{font-size:.82rem;color:var(--muted)}
+    @media(max-width:900px){
+      .hero-grid,.quiz-layout,.contact-grid{grid-template-columns:1fr}
+      .hero{padding-top:48px}
+      .hero-image{height:380px}
+      .floating-note{left:12px}
+      .card-grid{grid-template-columns:repeat(2,1fr)}
+      .steps{grid-template-columns:repeat(2,1fr)}
+      .quiz-intro{position:static}
+      .awareness-banner{grid-template-columns:1fr}
+      .awareness-banner img{height:260px}
+    }
+    @media(max-width:640px){
+      .container{width:min(100% - 28px,1120px)}
+      .nav-wrap{min-height:66px}
+      .menu-toggle{display:block}
+      .nav-links{display:none;position:absolute;top:66px;left:0;right:0;padding:16px 22px 20px;background:var(--cream);border-bottom:1px solid var(--line);flex-direction:column;align-items:stretch;gap:0}
+      .nav-links.open{display:flex}
+      .nav-links a{padding:10px 0}
+      .hero{padding:38px 0 44px}
+      .hero-image{height:300px;border-radius:24px}
+      .floating-note{position:relative;left:auto;bottom:auto;margin:-28px 14px 0;max-width:none}
+      .section{padding:56px 0}
+      .stats,.card-grid,.problem-grid,.steps,.references{grid-template-columns:1fr}
+      .card-image{height:220px}
+      .quiz-box,.contact-form{padding:20px}
+      .awareness-banner{padding:22px}
+      h1{font-size:2.7rem}
+    }
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important}}
+  </style>
 </head>
 <body>
+  <a class="skip-link" href="#main">Skip to main content</a>
   <header class="site-header">
-    <a class="brand" href="#home" aria-label="SoilGuard home"><span class="brand-icon">🌱</span> SoilGuard</a>
-    <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
-    <nav id="nav">
-      <a href="#home">Home</a><a href="#problem">The Problem</a><a href="#solutions">Solutions</a><a href="#gallery">Awareness</a><a href="#about">About CSP</a><a class="nav-cta" href="#contact">Contact</a>
-    </nav>
+    <div class="container nav-wrap">
+      <a class="brand" href="#home" aria-label="SoilGuard home"><span class="brand-mark" aria-hidden="true">🌱</span><span>SoilGuard</span></a>
+      <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="navLinks">☰ Menu</button>
+      <nav class="nav-links" id="navLinks" aria-label="Main navigation">
+        <a href="#home">Home</a><a href="#problem">The Problem</a><a href="#solutions">Solutions</a><a href="#community">Community</a><a href="#quiz">Quiz</a><a href="#contact">Feedback</a>
+      </nav>
+    </div>
   </header>
 
-  <main>
+  <main id="main">
     <section class="hero" id="home">
-      <div class="hero-content">
-        <p class="eyebrow">COMMUNITY SERVICE PROJECT · BTECH CSE</p>
-        <h1>Healthy soil.<br><span>A healthier future.</span></h1>
-        <p class="hero-copy">Soil is the foundation of our food, ecosystems, and communities. Learn how we can protect it from erosion, pollution, and land degradation—one action at a time.</p>
-        <div class="hero-actions"><a class="button primary" href="#solutions">Explore solutions <span>→</span></a><a class="button secondary" href="#problem">Understand the problem</a></div>
-        <div class="hero-stats"><div><strong>95%</strong><span>of our food depends on soil-related processes*</span></div><div><strong>Protect</strong><span>soil today for tomorrow</span></div></div>
-        <p class="source-note">*Commonly cited estimate; see project references before academic submission.</p>
-      </div>
-      <div class="hero-visual">
-        <div class="sun"></div><div class="hill hill-back"></div><div class="hill hill-front"></div>
-        <div class="plant plant-one"><i></i><b></b><span></span></div>
-        <div class="plant plant-two"><i></i><b></b><span></span></div>
-        <div class="plant plant-three"><i></i><b></b><span></span></div>
-        <div class="soil-label"><span>🌿</span><div><strong>Living soil</strong><small>Our shared responsibility</small></div></div>
-      </div>
-    </section>
-
-    <section class="intro section" id="problem">
-      <div class="section-heading"><p class="eyebrow">01 / THE CHALLENGE</p><h2>Soil is more than dirt.</h2><p>It supports plant growth, stores water and carbon, and provides a home for countless organisms. But human activities can damage this vital resource.</p></div>
-      <div class="problem-grid">
-        <article class="info-card"><div class="card-icon orange">🌧️</div><h3>Soil erosion</h3><p>Wind and water carry away fertile topsoil, especially when land has little plant cover.</p></article>
-        <article class="info-card"><div class="card-icon yellow">🧪</div><h3>Pollution</h3><p>Improper waste disposal and harmful chemicals can contaminate soil and affect living organisms.</p></article>
-        <article class="info-card"><div class="card-icon green">🌾</div><h3>Loss of fertility</h3><p>Repeated intensive cultivation and poor soil management can reduce nutrients and soil structure.</p></article>
-        <article class="info-card"><div class="card-icon blue">🏗️</div><h3>Land degradation</h3><p>Deforestation, construction, and overgrazing can leave land less productive and more vulnerable.</p></article>
+      <div class="container hero-grid">
+        <div>
+          <span class="eyebrow">🌍 Community Service Project</span>
+          <h1>Protect our soil.<br><span>Protect our future.</span></h1>
+          <p class="hero-copy">Healthy soil grows our food, filters water, supports biodiversity, and sustains communities. Learn how small everyday choices can help protect this valuable natural resource.</p>
+          <div class="actions">
+            <a class="btn btn-primary" href="#solutions">Explore solutions <span aria-hidden="true">↗</span></a>
+            <a class="btn btn-secondary" href="#quiz">Take the soil quiz</a>
+          </div>
+          <p class="hero-note">A student-led awareness website for soil conservation and environmental responsibility.</p>
+          <div class="stats">
+            <div class="stat"><strong>Prevent</strong><span>Soil erosion and land degradation</span></div>
+            <div class="stat"><strong>Restore</strong><span>Soil health and organic matter</span></div>
+            <div class="stat"><strong>Inspire</strong><span>Community action and awareness</span></div>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <img class="hero-image" src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1200&q=85" alt="Green agricultural fields and rolling countryside" fetchpriority="high">
+          <div class="floating-note"><strong>Soil is a living resource.</strong><small>Protecting it today helps future generations thrive.</small></div>
+        </div>
       </div>
     </section>
 
-    <section class="solutions section" id="solutions">
-      <div class="section-heading light"><p class="eyebrow">02 / TAKE ACTION</p><h2>Small steps. Lasting impact.</h2><p>Soil protection starts with choices at home, in our communities, and on farms.</p></div>
-      <div class="solution-list">
-        <div class="solution-item"><span class="solution-number">01</span><div><h3>Grow more plants</h3><p>Trees, grasses, and ground cover help hold soil in place and reduce erosion.</p></div><span class="solution-emoji">🌳</span></div>
-        <div class="solution-item"><span class="solution-number">02</span><div><h3>Compost organic waste</h3><p>Composting suitable food and garden waste can return organic matter to soil.</p></div><span class="solution-emoji">♻️</span></div>
-        <div class="solution-item"><span class="solution-number">03</span><div><h3>Use chemicals responsibly</h3><p>Follow recommended application guidance and avoid dumping oils, paints, or chemicals on land.</p></div><span class="solution-emoji">🧤</span></div>
-        <div class="solution-item"><span class="solution-number">04</span><div><h3>Keep land covered</h3><p>Mulch, cover crops, and careful water management help protect the soil surface.</p></div><span class="solution-emoji">🌱</span></div>
+    <section class="section section-soft" id="problem">
+      <div class="container">
+        <div class="section-heading">
+          <span class="eyebrow">Understand the challenge</span>
+          <h2>Why soil protection matters</h2>
+          <p>Soil degradation can happen gradually, but its effects reach farms, water systems, wildlife, and people.</p>
+        </div>
+        <div class="problem-grid">
+          <article class="problem"><div class="problem-icon" aria-hidden="true">🌧️</div><div><h3>Soil erosion</h3><p>Rain and wind can carry away fertile topsoil, especially where land is bare or vegetation has been removed.</p></div></article>
+          <article class="problem"><div class="problem-icon" aria-hidden="true">🌳</div><div><h3>Deforestation</h3><p>Removing trees and plant cover leaves soil more exposed and can disrupt habitats and the water cycle.</p></div></article>
+          <article class="problem"><div class="problem-icon" aria-hidden="true">🧪</div><div><h3>Pollution and poor soil health</h3><p>Improper waste disposal and excessive or unsuitable chemical use can harm soil organisms and water quality.</p></div></article>
+          <article class="problem"><div class="problem-icon" aria-hidden="true">🚜</div><div><h3>Unsustainable land use</h3><p>Overgrazing, repeated intensive tillage, and leaving fields bare can reduce soil structure and resilience.</p></div></article>
+        </div>
       </div>
     </section>
 
-    <section class="awareness section" id="gallery">
-      <div class="section-heading"><p class="eyebrow">03 / AWARENESS CORNER</p><h2>Make soil care a habit.</h2><p>Use these ideas for a classroom, campus, or community awareness activity.</p></div>
-      <div class="awareness-grid">
-        <article class="awareness-card poster poster-green"><span class="poster-tag">PLANT</span><div class="poster-art">🌱</div><h3>Plant native trees</h3><p>Roots help bind soil and support local biodiversity.</p></article>
-        <article class="awareness-card poster poster-sand"><span class="poster-tag">REDUCE</span><div class="poster-art">🗑️</div><h3>Dispose waste properly</h3><p>Keep plastics, batteries, and chemicals out of the ground.</p></article>
-        <article class="awareness-card poster poster-blue"><span class="poster-tag">RESTORE</span><div class="poster-art">🌾</div><h3>Protect fertile land</h3><p>Encourage responsible land use and sustainable farming.</p></article>
+    <section class="section" id="solutions">
+      <div class="container">
+        <div class="section-heading">
+          <span class="eyebrow">Practical actions</span>
+          <h2>Simple ways to protect soil</h2>
+          <p>Choose methods suited to local land, climate, and farming practices. A combination of methods often works best.</p>
+        </div>
+        <div class="card-grid">
+          <article class="card"><img class="card-image" src="https://images.unsplash.com/photo-1589923188900-85dae523342b?auto=format&fit=crop&w=900&q=80" alt="Hands working with healthy soil and young plants" loading="lazy"><div class="card-body"><span class="tag">Soil health</span><h3>Composting</h3><p>Turn suitable kitchen and garden scraps into compost. Adding mature compost can improve soil structure and organic matter.</p></div></article>
+          <article class="card"><img class="card-image" src="https://images.unsplash.com/photo-1497250681960-ef046c08a56e?auto=format&fit=crop&w=900&q=80" alt="Healthy green plants growing in a pot" loading="lazy"><div class="card-body"><span class="tag">Green cover</span><h3>Plant trees and ground cover</h3><p>Roots help hold soil in place. Keep soil covered with suitable plants, mulch, or crop residues where appropriate.</p></div></article>
+          <article class="card"><img class="card-image" src="https://images.unsplash.com/photo-1500937386664-56d1dfef3854?auto=format&fit=crop&w=900&q=80" alt="Rows of crops growing across a farm field" loading="lazy"><div class="card-body"><span class="tag">Farming</span><h3>Crop rotation</h3><p>Growing different crops in sequence can support soil structure, nutrient cycling, and pest management.</p></div></article>
+          <article class="card"><img class="card-image" src="https://images.unsplash.com/photo-1472396961693-142e6e269027?auto=format&fit=crop&w=900&q=80" alt="Natural landscape with trees and vegetation" loading="lazy"><div class="card-body"><span class="tag">Erosion control</span><h3>Contour farming and terracing</h3><p>On suitable slopes, farming along contours or using properly designed terraces can slow runoff and reduce soil loss.</p></div></article>
+          <article class="card"><img class="card-image" src="https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&fit=crop&w=900&q=80" alt="Water flowing in a natural waterway" loading="lazy"><div class="card-body"><span class="tag">Water care</span><h3>Rainwater harvesting</h3><p>Well-planned rainwater collection and infiltration measures can reduce runoff and help conserve water for plants.</p></div></article>
+          <article class="card"><img class="card-image" src="https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?auto=format&fit=crop&w=900&q=80" alt="Gardener tending a small vegetable garden" loading="lazy"><div class="card-body"><span class="tag">Everyday action</span><h3>Dispose of waste responsibly</h3><p>Never dump plastics, batteries, oils, or chemicals on land. Separate waste and follow local collection guidance.</p></div></article>
+        </div>
       </div>
-      <div class="awareness-banner"><div><p class="eyebrow">YOUR ACTION MATTERS</p><h3>Share the message. Protect the ground beneath us.</h3></div><a class="button primary" href="#contact">Send feedback <span>→</span></a></div>
     </section>
 
-    <section class="about section" id="about">
-      <div class="about-copy"><p class="eyebrow">04 / ABOUT THIS PROJECT</p><h2>Community Service Project</h2><p>This educational website is designed to raise awareness about soil protection, explain common threats, and encourage practical actions within the community.</p><p>It can be used as a BTech CSE CSP project demonstration. Replace the sample student and college details below with your own information before submitting.</p></div>
-      <div class="project-details"><div><span>Project title</span><strong>Soil Protection and Awareness</strong></div><div><span>Project type</span><strong>Community Service Project (CSP)</strong></div><div><span>Technology</span><strong>HTML · CSS · JavaScript</strong></div><div><span>Student / College</span><strong>Add your details here</strong></div></div>
+    <section class="section section-soft" id="community">
+      <div class="container">
+        <div class="section-heading">
+          <span class="eyebrow">From learning to action</span>
+          <h2>Make soil care a community habit</h2>
+          <p>Students, households, farmers, and local groups can work together to spread awareness and encourage practical change.</p>
+        </div>
+        <div class="awareness-banner">
+          <div>
+            <span class="eyebrow">Community action plan</span>
+            <h2>Start small. Grow the impact.</h2>
+            <p>Use this sample plan for a campus or neighbourhood awareness activity. Add your own verified project photos and outcomes after conducting activities.</p>
+            <ul>
+              <li>Share a short soil-protection awareness talk.</li>
+              <li>Demonstrate composting and responsible waste separation.</li>
+              <li>Plant suitable native species with permission and aftercare.</li>
+              <li>Collect feedback and record participation honestly.</li>
+            </ul>
+            <a class="btn btn-secondary" href="#contact">Share your suggestion</a>
+          </div>
+          <img src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?auto=format&fit=crop&w=1000&q=85" alt="Person caring for plants in a garden" loading="lazy">
+        </div>
+        <div class="steps" style="margin-top:24px">
+          <article class="step"><h3>Learn</h3><p>Understand local soil issues using trusted sources and community observations.</p></article>
+          <article class="step"><h3>Plan</h3><p>Choose a safe, realistic activity and get permission where needed.</p></article>
+          <article class="step"><h3>Participate</h3><p>Invite students and residents to take part in awareness and conservation efforts.</p></article>
+          <article class="step"><h3>Reflect</h3><p>Record what happened, what was learned, and what could be improved.</p></article>
+        </div>
+      </div>
     </section>
 
-    <section class="contact section" id="contact">
-      <div class="contact-intro"><p class="eyebrow">05 / GET INVOLVED</p><h2>Have an idea to protect soil?</h2><p>Send a suggestion, share an awareness activity, or tell us what your community is doing to protect the land.</p><div class="contact-note"><span>💚</span><p><strong>One community, one planet.</strong><br>Every responsible action helps.</p></div></div>
-      <form id="feedbackForm" class="feedback-form">
-        <label for="name">Your name</label><input id="name" name="name" type="text" placeholder="Enter your name" required>
-        <label for="email">Email address</label><input id="email" name="email" type="email" placeholder="you@example.com" required>
-        <label for="topic">Feedback topic</label><select id="topic" name="topic"><option>Suggestion</option><option>Awareness activity</option><option>Question</option><option>Project feedback</option></select>
-        <label for="message">Your message</label><textarea id="message" name="message" rows="4" placeholder="Write your message..." required></textarea>
-        <button class="button primary submit-button" type="submit">Submit feedback <span>→</span></button>
-        <p class="form-help">Demo form: messages are not sent to a server. Connect a backend or form service to collect real submissions.</p>
-        <p id="formMessage" class="form-message" role="status"></p>
-      </form>
+    <section class="section" id="quiz">
+      <div class="container quiz-layout">
+        <div class="quiz-intro">
+          <span class="eyebrow">Test your knowledge</span>
+          <h2>Soil protection quiz</h2>
+          <p>Answer five quick questions. Your score appears at the end, along with a message to encourage further learning.</p>
+          <p class="small-note">This quiz runs in your browser. It does not collect or send your answers.</p>
+        </div>
+        <div class="quiz-box" aria-live="polite">
+          <div class="question-count" id="questionCount">Question 1 of 5</div>
+          <div class="quiz-progress" aria-hidden="true"><span id="progressBar"></span></div>
+          <h3 class="question" id="questionText">Which part of the soil is usually richest in organic matter?</h3>
+          <div class="answers" id="answerList"></div>
+          <div class="feedback" id="quizFeedback" role="status"></div>
+          <div class="quiz-controls">
+            <button class="btn btn-secondary" id="restartQuiz" type="button">Restart</button>
+            <button class="btn btn-primary" id="nextQuestion" type="button" disabled>Next question →</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-soft" id="contact">
+      <div class="container contact-grid">
+        <div class="contact-copy">
+          <span class="eyebrow">Your voice matters</span>
+          <h2>Feedback & suggestions</h2>
+          <p>Tell us which soil-protection idea you found useful or suggest an awareness activity for your school, college, or community.</p>
+          <p><strong>Project note:</strong> Replace the sample project details with your actual college, department, team, and faculty guide information before submission.</p>
+          <p class="small-note">This is a static website hosted on GitHub Pages. The form below uses Formspree only if its form ID is configured.</p>
+        </div>
+        <form class="contact-form" id="feedbackForm" action="https://formspree.io/f/xdeazlel" method="POST">
+          <div class="field"><label for="visitorName">Your name</label><input id="visitorName" name="name" type="text" autocomplete="name" maxlength="80" placeholder="Enter your name" required></div>
+          <div class="field"><label for="visitorEmail">Email address</label><input id="visitorEmail" name="email" type="email" autocomplete="email" placeholder="you@example.com" required></div>
+          <div class="field"><label for="visitorRole">I am a…</label><select id="visitorRole" name="visitor_role" required><option value="">Choose one</option><option>Student</option><option>Teacher / Faculty</option><option>Farmer</option><option>Community member</option><option>Other</option></select></div>
+          <div class="field"><label for="visitorFeedback">Feedback or suggestion</label><textarea id="visitorFeedback" name="message" minlength="5" maxlength="1500" placeholder="Share your thoughts..." required></textarea><small>Do not enter private or sensitive information.</small></div>
+          <input type="hidden" name="_subject" value="SoilGuard CSP website feedback">
+          <button class="btn btn-primary" id="submitFeedback" type="submit">Send feedback ↗</button>
+          <p class="form-status" id="formStatus" role="status"></p>
+        </form>
+      </div>
+    </section>
+
+    <section class="section" id="references">
+      <div class="container">
+        <div class="section-heading">
+          <span class="eyebrow">Learn more</span>
+          <h2>References & useful resources</h2>
+          <p>Explore trusted educational resources for more detailed information about soil health and conservation.</p>
+        </div>
+        <div class="references">
+          <div class="reference"><a href="https://www.fao.org/soils-portal/en/" target="_blank" rel="noopener noreferrer">FAO — Soils Portal ↗</a><p>International resources about soil functions, management, and conservation.</p></div>
+          <div class="reference"><a href="https://soilhealth.dac.gov.in/" target="_blank" rel="noopener noreferrer">Government of India — Soil Health Card ↗</a><p>Information about soil testing and soil health management in India.</p></div>
+          <div class="reference"><a href="https://www.unccd.int/" target="_blank" rel="noopener noreferrer">UN Convention to Combat Desertification ↗</a><p>Resources on land degradation, drought, and sustainable land management.</p></div>
+          <div class="reference"><a href="https://www.fao.org/global-soil-partnership/en/" target="_blank" rel="noopener noreferrer">FAO — Global Soil Partnership ↗</a><p>Global cooperation and knowledge related to sustainable soil management.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-soft">
+      <div class="container conclusion">
+        <span class="eyebrow">Our conclusion</span>
+        <h2>Healthy soil is everyone's responsibility.</h2>
+        <p>Soil protection helps preserve food production, biodiversity, and clean water. By reducing waste, keeping soil covered, supporting responsible farming, and spreading awareness, each of us can contribute to a healthier environment. Sustainable change begins with informed, consistent action.</p>
+        <a class="btn btn-primary" href="#home">Back to the beginning ↑</a>
+      </div>
     </section>
   </main>
 
-  <footer><a class="brand" href="#home"><span class="brand-icon">🌱</span> SoilGuard</a><p>Soil Protection CSP Project · Learn. Care. Restore.</p><a href="#home" class="back-top">Back to top ↑</a></footer>
-  <script src="script.js"></script>
+  <footer>
+    <div class="container footer-wrap">
+      <div><strong>🌱 SoilGuard</strong><br><span class="small-note" style="color:#dbe6d8">Soil Protection — Community Service Project</span></div>
+      <div>Made for environmental awareness · <span id="year"></span></div>
+      <a href="#references">References</a>
+    </div>
+  </footer>
+  <button class="back-top" id="backTop" type="button" aria-label="Back to top">↑</button>
+
+  <script>
+    // Mobile navigation
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+    menuToggle.addEventListener('click', () => {
+      const isOpen = navLinks.classList.toggle('open');
+      menuToggle.setAttribute('aria-expanded', String(isOpen));
+      menuToggle.textContent = isOpen ? '✕ Close' : '☰ Menu';
+    });
+    navLinks.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+      navLinks.classList.remove('open');
+      menuToggle.setAttribute('aria-expanded', 'false');
+      menuToggle.textContent = '☰ Menu';
+    }));
+
+    // Quiz
+    const questions = [
+      {q:'Which part of the soil is usually richest in organic matter?',a:['Topsoil','Solid bedrock','Only deep subsoil','None of these'],correct:0,why:'Topsoil commonly contains more organic matter and biological activity than deeper layers.'},
+      {q:'What is one major benefit of planting trees and ground cover?',a:['They expose more soil','Their roots can help hold soil in place','They stop all rainfall','They remove all soil nutrients'],correct:1,why:'Roots and plant cover can help reduce erosion caused by water and wind.'},
+      {q:'What can suitable compost add to soil?',a:['Plastic waste','Useful organic matter','Engine oil','Salt only'],correct:1,why:'Mature compost can add organic matter and support better soil structure.'},
+      {q:'Which action helps reduce soil pollution?',a:['Dumping batteries outdoors','Burning plastic on farmland','Disposing of chemicals responsibly','Leaving waste in streams'],correct:2,why:'Safe waste handling helps protect soil, water, people, and wildlife.'},
+      {q:'Which is a useful community soil-protection activity?',a:['Removing all plants from a slope','Organising an awareness session and suitable planting activity','Dumping waste in an empty field','Leaving eroded areas unreported'],correct:1,why:'Awareness and well-planned local action can encourage better conservation habits.'}
+    ];
+    let questionIndex = 0;
+    let score = 0;
+    let answered = false;
+    const questionCount = document.getElementById('questionCount');
+    const questionText = document.getElementById('questionText');
+    const answerList = document.getElementById('answerList');
+    const quizFeedback = document.getElementById('quizFeedback');
+    const nextQuestion = document.getElementById('nextQuestion');
+    const progressBar = document.getElementById('progressBar');
+
+    function renderQuestion() {
+      answered = false;
+      const item = questions[questionIndex];
+      questionCount.textContent = `Question ${questionIndex + 1} of ${questions.length}`;
+      questionText.textContent = item.q;
+      answerList.replaceChildren();
+      quizFeedback.textContent = '';
+      nextQuestion.disabled = true;
+      nextQuestion.textContent = questionIndex === questions.length - 1 ? 'See my score →' : 'Next question →';
+      progressBar.style.width = `${(questionIndex / questions.length) * 100}%`;
+      item.a.forEach((answer, index) => {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'answer';
+        button.textContent = `${String.fromCharCode(65 + index)}. ${answer}`;
+        button.addEventListener('click', () => chooseAnswer(index));
+        answerList.appendChild(button);
+      });
+    }
+    function chooseAnswer(selected) {
+      if (answered) return;
+      answered = true;
+      const item = questions[questionIndex];
+      [...answerList.children].forEach((button, index) => {
+        button.disabled = true;
+        if (index === item.correct) button.classList.add('correct');
+        if (index === selected && selected !== item.correct) button.classList.add('incorrect');
+      });
+      if (selected === item.correct) {
+        score++;
+        quizFeedback.textContent = `Correct! ${item.why}`;
+      } else {
+        quizFeedback.textContent = `Not quite. ${item.why}`;
+      }
+      nextQuestion.disabled = false;
+      progressBar.style.width = `${((questionIndex + 1) / questions.length) * 100}%`;
+    }
+    function showScore() {
+      questionCount.textContent = 'Quiz complete';
+      progressBar.style.width = '100%';
+      questionText.textContent = 'Your soil-protection score';
+      answerList.replaceChildren();
+      const scoreEl = document.createElement('div');
+      scoreEl.className = 'score';
+      scoreEl.textContent = `${score} / ${questions.length}`;
+      answerList.appendChild(scoreEl);
+      const message = document.createElement('p');
+      message.textContent = score === questions.length ? 'Excellent work! You are ready to share what you learned.' : score >= 3 ? 'Good effort! Review the solutions section and try again.' : 'Keep learning! Explore the conservation methods above, then retake the quiz.';
+      answerList.appendChild(message);
+      quizFeedback.textContent = 'Thanks for taking part. Your score stays in this browser session only.';
+      nextQuestion.disabled = true;
+      nextQuestion.textContent = 'Quiz completed';
+    }
+    nextQuestion.addEventListener('click', () => {
+      if (!answered) return;
+      if (questionIndex < questions.length - 1) {
+        questionIndex++;
+        renderQuestion();
+      } else {
+        showScore();
+      }
+    });
+    document.getElementById('restartQuiz').addEventListener('click', () => {
+      questionIndex = 0; score = 0; renderQuestion();
+    });
+    renderQuestion();
+
+    // Feedback form: Formspree endpoint is configured to the form ID supplied by the project owner.
+    const feedbackForm = document.getElementById('feedbackForm');
+    const formStatus = document.getElementById('formStatus');
+    feedbackForm.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      if (!feedbackForm.reportValidity()) return;
+      const submitButton = document.getElementById('submitFeedback');
+      submitButton.disabled = true;
+      submitButton.textContent = 'Sending…';
+      formStatus.textContent = '';
+      try {
+        const response = await fetch(feedbackForm.action, {
+          method: 'POST',
+          body: new FormData(feedbackForm),
+          headers: { 'Accept': 'application/json' }
+        });
+        if (response.ok) {
+          formStatus.textContent = 'Thank you! Your feedback has been submitted.';
+          feedbackForm.reset();
+        } else {
+          formStatus.textContent = 'We could not submit the form. Please check the Formspree setup or try again later.';
+        }
+      } catch (error) {
+        formStatus.textContent = 'Network issue: please check your connection and try again.';
+      } finally {
+        submitButton.disabled = false;
+        submitButton.textContent = 'Send feedback ↗';
+      }
+    });
+
+    // Footer year and back-to-top button
+    document.getElementById('year').textContent = new Date().getFullYear();
+    const backTop = document.getElementById('backTop');
+    window.addEventListener('scroll', () => backTop.classList.toggle('show', window.scrollY > 500), {passive:true});
+    backTop.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
+  </script>
 </body>
 </html>
